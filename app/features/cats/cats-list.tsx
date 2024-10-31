@@ -1,7 +1,6 @@
 "use client";
-import { useGetCats } from "./hooks/use-get-cats";
 import CatContainer from "./cat-container";
-import { useEffect, useRef } from "react";
+import { useGetCats, useInfiniteScroll } from "./hooks";
 
 export default function CatsList() {
   const {
@@ -13,24 +12,11 @@ export default function CatsList() {
     isFetchingNextPage,
   } = useGetCats();
 
-  const observerRef = useRef(null);
-
-  useEffect(() => {
-    if (!hasNextPage || isFetchingNextPage) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    if (observerRef.current) observer.observe(observerRef.current);
-
-    return () => observer.disconnect();
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  const { observerRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   if (isPending) return "loading...";
 
