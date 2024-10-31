@@ -1,4 +1,5 @@
 "use client";
+
 import CatCard from "./cat-card";
 import { useGetCats, useInfiniteScroll } from "./hooks";
 

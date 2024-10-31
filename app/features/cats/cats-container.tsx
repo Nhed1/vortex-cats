@@ -1,4 +1,4 @@
-import CatsList from "./cats-list";
+import CatsList from "./components/list/cats-list";
 
 export default function CatsContainer() {
   return (
