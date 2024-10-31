@@ -1,14 +1,8 @@
 import { catApi } from "@/app/utils/api";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { CatsData } from "../interfaces";
 
 const CATS_LIMIT = 5;
-
-interface CatsData {
-  breeds: string[];
-  url: string;
-  id: string;
-  name: string;
-}
 
 export const useGetCats = () => {
   const fetchCats = async ({ pageParam = 1 }): Promise<CatsData[]> => {
@@ -16,6 +10,7 @@ export const useGetCats = () => {
       params: {
         page: pageParam,
         limit: CATS_LIMIT,
+        has_breeds: true,
       },
     });
     return response.data;
