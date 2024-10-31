@@ -1,1 +1,1 @@
-export * from "./cats-list";
+export * from "./cats-container";

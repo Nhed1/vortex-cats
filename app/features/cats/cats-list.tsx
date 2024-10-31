@@ -23,7 +23,7 @@ export default function CatsList() {
   if (error) return "An error has occurred: " + error;
 
   return (
-    <div className="flex flex-col items-center p-16 w-full">
+    <div className="flex flex-col items-center w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-6 mx-auto">
         {data?.pages.map((group) =>
           group.map((cat) => (

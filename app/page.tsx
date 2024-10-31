@@ -1,5 +1,5 @@
-import CatsList from "./features/cats/cats-list";
+import CatsContainer from "./features/cats/cats-container";
 
 export default function Home() {
-  return <CatsList />;
+  return <CatsContainer />;
 }
