@@ -8,8 +8,10 @@ interface Cat {
 
 export default function CatContainer({ url = "", name = "---" }: Cat) {
   return (
-    <div className="rounded gap-6 border-2 border-black w-fit text-black">
-      <Image src={url} alt={name} width={209} height={209} />
+    <div className="rounded-2xl gap-6 border-2 border-black w-fit">
+      <div className="relative w-[200px] h-[200px] rounded-2xl overflow-hidden">
+        <Image src={url} alt={name} layout="fill" objectFit="cover" />
+      </div>
       <p>{name}</p>
     </div>
   );

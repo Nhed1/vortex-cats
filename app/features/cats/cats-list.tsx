@@ -23,16 +23,18 @@ export default function CatsList() {
   if (error) return "An error has occurred: " + error;
 
   return (
-    <div className="bg-white">
-      <>
-        {data?.pages.map((group, i) => (
-          <div key={i}>
-            {group.map((cat) => (
-              <CatContainer key={cat.id} name={cat.name} url={cat.url} />
-            ))}
-          </div>
-        ))}
-      </>
+    <div className="flex flex-col items-center p-16 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
+        {data?.pages.map((group) =>
+          group.map((cat) => (
+            <CatContainer
+              key={cat.id}
+              name={cat.breeds[0].name}
+              url={cat.url}
+            />
+          ))
+        )}
+      </div>
       <div ref={observerRef}>
         {isFetchingNextPage
           ? "Loading more..."
