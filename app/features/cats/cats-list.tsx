@@ -1,5 +1,5 @@
 "use client";
-import CatContainer from "./cat-container";
+import CatCard from "./cat-card";
 import { useGetCats, useInfiniteScroll } from "./hooks";
 
 export default function CatsList() {
@@ -24,14 +24,10 @@ export default function CatsList() {
 
   return (
     <div className="flex flex-col items-center p-16 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-6 mx-auto">
         {data?.pages.map((group) =>
           group.map((cat) => (
-            <CatContainer
-              key={cat.id}
-              name={cat.breeds[0].name}
-              url={cat.url}
-            />
+            <CatCard key={cat.id} name={cat.breeds[0]?.name} url={cat.url} />
           ))
         )}
       </div>
