@@ -4,20 +4,26 @@ import { CatsData } from "../interfaces";
 
 const CATS_LIMIT = 20;
 
-export const useGetCats = () => {
+export const useGetCats = ({
+  categoryIds = [],
+}: {
+  categoryIds?: number[];
+}) => {
   const fetchCats = async ({ pageParam = 1 }): Promise<CatsData[]> => {
     const response = await catApi.get("/images/search", {
       params: {
         page: pageParam,
         limit: CATS_LIMIT,
-        has_breeds: true,
+        has_breeds: categoryIds.length === 0,
+        category_ids: categoryIds.length > 0 ? categoryIds.join(",") : null,
       },
     });
     return response.data;
   };
 
   return useInfiniteQuery({
-    queryKey: ["cats"],
+    staleTime: Infinity,
+    queryKey: ["cats", categoryIds],
     queryFn: fetchCats,
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) =>

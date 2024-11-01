@@ -3,7 +3,7 @@
 import CatCard from "./cat-card";
 import { useGetCats, useInfiniteScroll } from "./hooks";
 
-export default function CatsList() {
+export default function CatsList({ filterId }: { filterId?: number }) {
   const {
     data,
     error,
@@ -11,7 +11,9 @@ export default function CatsList() {
     hasNextPage,
     isPending,
     isFetchingNextPage,
-  } = useGetCats();
+  } = useGetCats({
+    categoryIds: filterId ? [filterId] : [],
+  });
 
   const { observerRef } = useInfiniteScroll({
     fetchNextPage,
