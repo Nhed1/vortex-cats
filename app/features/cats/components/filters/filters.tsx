@@ -3,6 +3,8 @@
 import { FilterSelect } from "./filter-select";
 import { Dispatch, SetStateAction } from "react";
 import { useGetFilters } from "./hooks/use-get-filters";
+import { Error } from "@/app/components/error";
+import { LoadingIcon } from "@/app/components/loading-icon";
 
 export const Filters = ({
   filterId,
@@ -11,14 +13,14 @@ export const Filters = ({
   filterId?: number;
   setFilterId: Dispatch<SetStateAction<number | undefined>>;
 }) => {
-  const { data = [], isError, isLoading } = useGetFilters();
+  const { data = [], isError, isLoading, refetch } = useGetFilters();
 
   const selectFilter = (id: number) => {
     setFilterId((prevSelectedId) => (prevSelectedId === id ? undefined : id));
   };
 
-  if (isError) return "error";
-  if (isLoading) return "loading";
+  if (isError) return <Error onRetry={refetch} />;
+  if (isLoading) return <LoadingIcon />;
 
   return (
     <div className="gap-2 p-4 justify-center flex flex-wrap">

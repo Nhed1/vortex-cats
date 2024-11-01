@@ -1,16 +1,20 @@
 "use client";
 
+import { Loading } from "@/app/components/loading";
 import CatCard from "../cat-card";
 import { useGetCats, useInfiniteScroll } from "./hooks";
+import { Error } from "@/app/components/error";
+import { LoadingIcon } from "@/app/components/loading-icon";
 
 export default function CatsList({ filterId }: { filterId?: number }) {
   const {
     data,
-    error,
+    isError,
     fetchNextPage,
     hasNextPage,
-    isPending,
     isFetchingNextPage,
+    isPending,
+    refetch,
   } = useGetCats({
     categoryIds: filterId ? [filterId] : [],
   });
@@ -21,9 +25,8 @@ export default function CatsList({ filterId }: { filterId?: number }) {
     isFetchingNextPage,
   });
 
-  if (isPending) return "loading...";
-
-  if (error) return "An error has occurred: " + error;
+  if (isPending) return <Loading />;
+  if (isError) return <Error onRetry={refetch} />;
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -40,9 +43,11 @@ export default function CatsList({ filterId }: { filterId?: number }) {
         )}
       </div>
       <div ref={observerRef}>
-        {isFetchingNextPage
-          ? "Loading more..."
-          : !hasNextPage && "Nothing more to load"}
+        {isFetchingNextPage ? (
+          <LoadingIcon />
+        ) : (
+          !hasNextPage && <div className="mt-6">Nothing more o load</div>
+        )}
       </div>
     </div>
   );
