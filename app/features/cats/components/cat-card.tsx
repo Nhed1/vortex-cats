@@ -14,7 +14,7 @@ const PLACEHOLDER_URL = "https://placehold.co/200x240/black/white";
 
 export default function CatCard({
   url = "",
-  name = "---",
+  name = "Unknown Cat",
   id,
   className,
 }: Cat) {
