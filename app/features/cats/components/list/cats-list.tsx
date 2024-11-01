@@ -30,7 +30,12 @@ export default function CatsList({ filterId }: { filterId?: number }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-6 mx-auto">
         {data?.pages.map((group) =>
           group.map((cat) => (
-            <CatCard key={cat.id} name={cat.breeds[0]?.name} url={cat.url} />
+            <CatCard
+              key={cat.id}
+              name={cat.breeds[0]?.name}
+              url={cat.url}
+              id={cat.id}
+            />
           ))
         )}
       </div>
