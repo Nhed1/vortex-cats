@@ -27,7 +27,7 @@ export default function CatCard({
       onClick={() => id && router.push(`/${id}`)}
     >
       <div
-        className={`relative w-full h-[240px] rounded-xl overflow-hidden ${className}`}
+        className={`relative w-full h-[240px] rounded-t-xl overflow-hidden ${className}`}
       >
         <Image
           src={url}

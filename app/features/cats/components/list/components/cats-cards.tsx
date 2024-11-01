@@ -10,7 +10,7 @@ export default function CatsCards({ catGroups }: { catGroups: CatsData[][] }) {
         group.map((cat) => (
           <CatCard
             key={cat.id}
-            name={cat.breeds ? cat.breeds[0].name : undefined}
+            name={cat.breeds ? cat.breeds[0]?.name : undefined}
             url={cat.url}
             id={cat.id}
           />
