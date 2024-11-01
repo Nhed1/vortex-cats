@@ -8,7 +8,7 @@ export default function CatsContainer() {
   const [filterId, setFilterId] = useState<number | undefined>();
 
   return (
-    <div className="flex flex-col items-center gap-12 py-8">
+    <div className="flex flex-col gap-2 py-4 mt-4 mx-auto w-fit">
       <Filters setFilterId={setFilterId} filterId={filterId} />
       <CatsList filterId={filterId} />
     </div>
