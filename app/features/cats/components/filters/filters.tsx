@@ -21,7 +21,7 @@ export const Filters = ({
   if (isLoading) return "loading";
 
   return (
-    <div className="gap-6 flex">
+    <div className="gap-2 p-4 justify-center flex flex-wrap">
       {data.map((filter) => (
         <FilterSelect
           key={filter.id}
