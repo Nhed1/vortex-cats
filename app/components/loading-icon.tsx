@@ -1,5 +1,7 @@
-export function LoadingIcon() {
+export function LoadingIcon({ className }: { className?: string }) {
   return (
-    <div className="w-10 h-10 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+    <div
+      className={`w-10 h-10 border-4 border-black border-t-transparent rounded-full animate-spin ${className}`}
+    ></div>
   );
 }

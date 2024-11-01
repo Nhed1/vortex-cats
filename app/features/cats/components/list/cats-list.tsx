@@ -44,7 +44,7 @@ export default function CatsList({ filterId }: { filterId?: number }) {
       </div>
       <div ref={observerRef}>
         {isFetchingNextPage ? (
-          <LoadingIcon />
+          <LoadingIcon className="my-8" />
         ) : (
           !hasNextPage && <div className="mt-6">Nothing more o load</div>
         )}
