@@ -14,7 +14,7 @@ export const Filters = ({
   const { data = [], isError, isLoading } = useGetFilters();
 
   const selectFilter = (id: number) => {
-    setFilterId(id);
+    setFilterId((prevSelectedId) => (prevSelectedId === id ? undefined : id));
   };
 
   if (isError) return "error";

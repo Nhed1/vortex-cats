@@ -1,6 +1,6 @@
 "use client";
 
-import CatCard from "./cat-card";
+import CatCard from "../cat-card";
 import { useGetCats, useInfiniteScroll } from "./hooks";
 
 export default function CatsList({ filterId }: { filterId?: number }) {

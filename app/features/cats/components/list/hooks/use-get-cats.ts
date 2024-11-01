@@ -1,6 +1,6 @@
 import { catApi } from "@/app/utils/api";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { CatsData } from "../interfaces";
+import { CatsData } from "../../interfaces";
 
 const CATS_LIMIT = 20;
 
