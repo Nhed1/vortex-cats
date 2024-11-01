@@ -7,20 +7,28 @@ interface Cat {
   url?: string;
   name?: string;
   id?: string;
+  className?: string;
 }
 
 const PLACEHOLDER_URL = "https://placehold.co/200x240/black/white";
 
-export default function CatCard({ url = "", name = "---", id }: Cat) {
+export default function CatCard({
+  url = "",
+  name = "---",
+  id,
+  className,
+}: Cat) {
   const router = useRouter();
   return (
     <div
-      className={`rounded-xl gap-6 border-2 border-black w-fit ${
+      className={`rounded-xl gap-6 max-h-[280px] border-2 border-black ${
         id && "cursor-pointer"
       } `}
       onClick={() => id && router.push(`/${id}`)}
     >
-      <div className="relative w-[209px] h-[240px] rounded-xl overflow-hidden">
+      <div
+        className={`relative w-[209px] h-[240px] rounded-xl overflow-hidden ${className}`}
+      >
         <Image
           src={url}
           alt={name}

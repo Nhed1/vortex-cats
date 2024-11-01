@@ -8,10 +8,14 @@ export default async function CatDetails({ id }: { id: string }) {
   const catInfo = catData.breeds[0];
 
   return (
-    <div className="flex gap-6 justify-center mx-auto w-1/2 mt-14">
-      <CatCard name={catInfo.name} url={catData.url} />
+    <div className="flex flex-col gap-8 w-full px-12 my-14 md:flex-row lg:px-56">
+      <CatCard
+        name={catInfo.name}
+        url={catData.url}
+        className="w-full md:w-[400px] md:max-h-[300px]"
+      />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col self-start gap-4">
         <InfoText label="Name:" value={catInfo.name} />
         <InfoText label="Description:" value={catInfo.description} />
         <InfoText label="Life Span:" value={catInfo.life_span} />
