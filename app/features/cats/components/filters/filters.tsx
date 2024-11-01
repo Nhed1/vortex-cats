@@ -5,8 +5,10 @@ import { Dispatch, SetStateAction } from "react";
 import { useGetFilters } from "./hooks/use-get-filters";
 
 export const Filters = ({
+  filterId,
   setFilterId,
 }: {
+  filterId?: number;
   setFilterId: Dispatch<SetStateAction<number | undefined>>;
 }) => {
   const { data = [], isError, isLoading } = useGetFilters();
@@ -24,6 +26,8 @@ export const Filters = ({
         <FilterSelect
           key={filter.id}
           title={filter.name}
+          id={filter.id}
+          selectedId={filterId}
           selectFilter={() => selectFilter(filter.id)}
         />
       ))}
