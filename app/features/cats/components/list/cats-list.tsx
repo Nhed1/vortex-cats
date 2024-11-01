@@ -29,7 +29,7 @@ export default function CatsList({ filterId }: { filterId?: number }) {
   if (isError) return <Error onRetry={refetch} />;
 
   return (
-    <div className="flex flex-col items-center">
+    <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-6">
         {data?.pages.map((group) =>
           group.map((cat) => (
@@ -49,6 +49,6 @@ export default function CatsList({ filterId }: { filterId?: number }) {
           !hasNextPage && <div className="mt-6">Nothing more o load</div>
         )}
       </div>
-    </div>
+    </>
   );
 }
