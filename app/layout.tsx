@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
-        <h1 className="font-bold text-5xl text-center mt-6">CATKNOW</h1>
+        <h1 className="font-bold text-5xl text-center mt-4">CATKNOW</h1>
 
         <Providers>{children}</Providers>
       </body>
