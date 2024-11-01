@@ -2,9 +2,9 @@
 
 import { Loading } from "@/app/components/loading";
 import CatCard from "../cat-card";
-import { useGetCats, useInfiniteScroll } from "./hooks";
+import { useGetCats } from "./hooks";
 import { Error } from "@/app/components/error";
-import { LoadingIcon } from "@/app/components/loading-icon";
+import { LoadMore } from "./components/load-more";
 
 export default function CatsList({ filterId }: { filterId?: number }) {
   const {
@@ -17,12 +17,6 @@ export default function CatsList({ filterId }: { filterId?: number }) {
     refetch,
   } = useGetCats({
     categoryIds: filterId ? [filterId] : [],
-  });
-
-  const { observerRef } = useInfiniteScroll({
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
   });
 
   if (isPending) return <Loading />;
@@ -42,13 +36,11 @@ export default function CatsList({ filterId }: { filterId?: number }) {
           ))
         )}
       </div>
-      <div ref={observerRef}>
-        {isFetchingNextPage ? (
-          <LoadingIcon className="my-8" />
-        ) : (
-          !hasNextPage && <div className="mt-6">Nothing more o load</div>
-        )}
-      </div>
+      <LoadMore
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
+      />
     </>
   );
 }
