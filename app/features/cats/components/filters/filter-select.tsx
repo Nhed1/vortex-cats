@@ -18,7 +18,7 @@ export const FilterSelect = ({
   return (
     <button
       onClick={selectFilter}
-      className={`px-4 py-2 border-2 rounded-lg transition-colors duration-200 ${
+      className={`px-4 py-2 border-2 rounded-3xl transition-colors duration-200 ${
         isSelected
           ? "bg-black text-white border-black"
           : "bg-white text-black border-black"
