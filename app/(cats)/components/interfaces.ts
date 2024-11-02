@@ -1,4 +1,4 @@
-interface Breed {
+export interface BreedData {
   name: string;
   origin: string;
   life_span: string;
@@ -6,7 +6,7 @@ interface Breed {
 }
 
 export interface CatsData {
-  breeds: Breed[];
+  breeds: BreedData[];
   url: string;
   id: string;
   name: string;

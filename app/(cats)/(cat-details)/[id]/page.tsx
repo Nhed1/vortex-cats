@@ -1,4 +1,4 @@
-import CatDetails from "../details/cat-details";
+import CatDetails from "../cat-details";
 
 export default async function Page({
   params,
