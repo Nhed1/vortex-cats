@@ -1,7 +1,7 @@
 "use client";
 
-import CatCard from "../../cat-card";
-import { CatsData } from "../../interfaces";
+import CatCard from "@/app/(cats)/components/cat-card";
+import { CatsData } from "@/app/(cats)/components/interfaces";
 
 export default function CatsCards({ catGroups }: { catGroups: CatsData[][] }) {
   return (

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Filters } from "./components/filters/filters";
-import CatsList from "./components/list/cats-list";
+import { Filters } from "./filters";
+import { CatsList } from "./list";
 
-export default function CatsContainer() {
+export default function Home() {
   const [filterId, setFilterId] = useState<number | undefined>();
 
   return (

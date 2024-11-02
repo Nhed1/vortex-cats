@@ -1,5 +1,3 @@
-"use client";
-
 import { FilterSelect } from "./filter-select";
 import { Dispatch, SetStateAction } from "react";
 import { useGetFilters } from "./hooks/use-get-filters";

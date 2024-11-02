@@ -6,7 +6,7 @@ import { Error } from "@/app/components/error";
 import { LoadMore } from "./components/load-more";
 import CatsCards from "./components/cats-cards";
 
-export default function CatsList({ filterId }: { filterId?: number }) {
+export const CatsList = ({ filterId }: { filterId?: number }) => {
   const {
     data,
     isError,
@@ -34,4 +34,4 @@ export default function CatsList({ filterId }: { filterId?: number }) {
       />
     </>
   );
-}
+};

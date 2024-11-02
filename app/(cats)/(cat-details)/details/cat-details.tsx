@@ -1,8 +1,8 @@
 import { catApi } from "@/app/utils/api";
-import { CatsData } from "../interfaces";
-import CatCard from "../cat-card";
 import InfoText from "./components/info-text";
 import { ReturnLink } from "@/app/components/return-link";
+import { CatsData } from "../../components/interfaces";
+import CatCard from "../../components/cat-card";
 
 export default async function CatDetails({ id }: { id: string }) {
   const catData = (await catApi.get<CatsData>(`/images/${id}`)).data;

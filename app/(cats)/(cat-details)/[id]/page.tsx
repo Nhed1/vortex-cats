@@ -1,4 +1,4 @@
-import CatDetails from "../features/cats/components/details/cat-details";
+import CatDetails from "../details/cat-details";
 
 export default async function Page({
   params,
