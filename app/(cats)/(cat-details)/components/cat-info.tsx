@@ -1,4 +1,4 @@
-import { BreedData } from "@/app/(cats)/components/interfaces";
+import { BreedData } from "@/app/(cats)/interfaces";
 import InfoText from "./info-text";
 
 export const CatInfo = ({ catInfo }: { catInfo: BreedData | null }) => {

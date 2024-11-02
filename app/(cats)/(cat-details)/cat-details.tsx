@@ -1,6 +1,6 @@
 import { catApi } from "@/app/utils/api";
 import { ReturnLink } from "@/app/components/return-link";
-import { CatsData } from "../components/interfaces";
+import { CatsData } from "../interfaces";
 import CatCard from "../components/cat-card";
 import { CatInfo } from "./components/cat-info";
 
