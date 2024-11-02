@@ -26,8 +26,7 @@ export const Filters = ({
         <FilterSelect
           key={filter.id}
           title={filter.name}
-          id={filter.id}
-          selectedId={filterId}
+          isSelected={filter.id === filterId}
           selectFilter={() => selectFilter(filter.id)}
         />
       ))}

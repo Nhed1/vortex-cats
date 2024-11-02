@@ -3,25 +3,19 @@
 interface FilterSelectProps {
   title: string;
   selectFilter: () => void;
-  id: number;
-  selectedId?: number;
+  isSelected: boolean;
 }
 
 export const FilterSelect = ({
   title,
   selectFilter,
-  id,
-  selectedId,
+  isSelected,
 }: FilterSelectProps) => {
-  const isSelected = id === selectedId;
-
   return (
     <button
       onClick={selectFilter}
-      className={`px-4 py-2 border-2 rounded-3xl transition-colors duration-200 ${
-        isSelected
-          ? "bg-black text-white border-black"
-          : "bg-white text-black border-black"
+      className={`px-4 py-2 border-2 rounded-3xl transition-colors duration-200 border-black ${
+        isSelected ? "bg-black text-white " : "bg-white text-black "
       }`}
     >
       {title}
