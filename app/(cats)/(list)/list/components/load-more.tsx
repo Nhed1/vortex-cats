@@ -17,7 +17,7 @@ export function LoadMore({
   });
 
   return (
-    <div ref={observerRef} className="self-center">
+    <div ref={observerRef} className="self-center" data-testid="load-more">
       {isFetchingNextPage ? (
         <LoadingIcon className="my-8" />
       ) : (

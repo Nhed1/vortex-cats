@@ -31,6 +31,8 @@ const setupGetCatsMock = ({
   data = undefined,
   isError = false,
   isPending = false,
+  hasNextPage = false,
+  isFetchingNextPage = false,
 }: {
   data?: {
     pages: {
@@ -41,13 +43,15 @@ const setupGetCatsMock = ({
   };
   isError?: boolean;
   isPending?: boolean;
+  hasNextPage?: boolean;
+  isFetchingNextPage?: boolean;
 }) => {
   (useGetCats as jest.Mock).mockReturnValue({
     data,
     isError,
     isPending,
-    hasNextPage: false,
-    isFetchingNextPage: false,
+    hasNextPage,
+    isFetchingNextPage,
     fetchNextPage: jest.fn(),
     refetch: jest.fn(),
   });
@@ -107,5 +111,31 @@ describe("List of cats", () => {
 
     expect(catCard1).toBeInTheDocument();
     expect(catCard2).toBeInTheDocument();
+  });
+
+  it("should load the next page when the user scrolls to the bottom of the page", async () => {
+    const fetchNextPage = jest.fn();
+
+    (useInfiniteScroll as jest.Mock).mockReturnValue({
+      observerRef: jest.fn().mockImplementation((node) => {
+        if (node) {
+          fetchNextPage();
+        }
+      }),
+    });
+
+    setupGetCatsMock({
+      data: { pages: [[]] },
+      hasNextPage: true,
+    });
+
+    renderCatsList();
+
+    const observerElement = screen.getByTestId("load-more");
+    observerElement.scrollIntoView = jest.fn();
+
+    observerElement.dispatchEvent(new Event("scroll", { bubbles: true }));
+
+    expect(fetchNextPage).toHaveBeenCalled();
   });
 });
