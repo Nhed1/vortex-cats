@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CatsList } from "../cats-list";
+import { useGetCats, useInfiniteScroll } from "../hooks";
 
 const queryClient = new QueryClient();
 
@@ -18,62 +19,67 @@ jest.mock("../hooks", () => ({
   useInfiniteScroll: jest.fn(),
 }));
 
+const renderCatsList = () => {
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <CatsList />
+    </QueryClientProvider>
+  );
+};
+
+const setupGetCatsMock = ({
+  data = undefined,
+  isError = false,
+  isPending = false,
+}: {
+  data?: {
+    pages: {
+      id: number;
+      url: string;
+      breeds: { name: string }[];
+    }[][];
+  };
+  isError?: boolean;
+  isPending?: boolean;
+}) => {
+  (useGetCats as jest.Mock).mockReturnValue({
+    data,
+    isError,
+    isPending,
+    hasNextPage: false,
+    isFetchingNextPage: false,
+    fetchNextPage: jest.fn(),
+    refetch: jest.fn(),
+  });
+};
+
+const setupInfiniteScrollMock = () => {
+  (useInfiniteScroll as jest.Mock).mockReturnValue({
+    observerRef: jest.fn(),
+  });
+};
+
 describe("List of cats", () => {
-  it("show loading while loading cats list", async () => {
-    const { useGetCats } = await import("../hooks");
-    const mockUseGetCats = useGetCats as jest.Mock;
+  it("should show loading screen while loading request", async () => {
+    setupGetCatsMock({ isPending: true });
 
-    mockUseGetCats.mockReturnValue({
-      data: undefined,
-      isError: false,
-      isPending: true,
-      hasNextPage: false,
-      isFetchingNextPage: false,
-      fetchNextPage: jest.fn(),
-      refetch: jest.fn(),
-    });
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <CatsList />
-      </QueryClientProvider>
-    );
+    renderCatsList();
 
     const loadingScreen = screen.getByTestId("loading-screen");
-
     expect(loadingScreen).toBeInTheDocument();
   });
 
-  it("show error if cats list can't be loaded", async () => {
-    const { useGetCats } = await import("../hooks");
-    const mockUseGetCats = useGetCats as jest.Mock;
+  it("should show error screen if request returns error", async () => {
+    setupGetCatsMock({ isError: true });
 
-    mockUseGetCats.mockReturnValue({
-      data: undefined,
-      isError: true,
-      isPending: false,
-      hasNextPage: false,
-      isFetchingNextPage: false,
-      fetchNextPage: jest.fn(),
-      refetch: jest.fn(),
-    });
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <CatsList />
-      </QueryClientProvider>
-    );
+    renderCatsList();
 
     const errorScreen = screen.getByText("Oops! Something went wrong.");
-
     expect(errorScreen).toBeInTheDocument();
   });
 
-  it("show cards of cats on success", async () => {
-    const { useGetCats, useInfiniteScroll } = await import("../hooks");
-
-    const mockUseGetCats = useGetCats as jest.Mock;
-    const mockUseInfiniteScroll = useInfiniteScroll as jest.Mock;
+  it("should show the cats list when request returns the data", async () => {
+    setupInfiniteScrollMock();
 
     const mockData = {
       pages: [
@@ -92,25 +98,9 @@ describe("List of cats", () => {
       ],
     };
 
-    mockUseInfiniteScroll.mockReturnValue({
-      observerRef: jest.fn(),
-    });
+    setupGetCatsMock({ data: mockData });
 
-    mockUseGetCats.mockReturnValue({
-      data: mockData,
-      isError: false,
-      isPending: false,
-      hasNextPage: false,
-      isFetchingNextPage: false,
-      fetchNextPage: jest.fn(),
-      refetch: jest.fn(),
-    });
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <CatsList />
-      </QueryClientProvider>
-    );
+    renderCatsList();
 
     const catCard1 = screen.getByText("cat1");
     const catCard2 = screen.getByText("cat2");
