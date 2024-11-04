@@ -1,8 +1,10 @@
+"use client";
 import { FilterSelect } from "./filter-select";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { useGetFilters } from "./hooks/use-get-filters";
 import { Error } from "@/app/components/error";
 import { LoadingIcon } from "@/app/components/loading-icon";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export const Filters = ({
   filterId,
@@ -11,11 +13,31 @@ export const Filters = ({
   filterId?: number;
   setFilterId: Dispatch<SetStateAction<number | undefined>>;
 }) => {
+  const router = useRouter();
   const { data = [], isError, isLoading, refetch } = useGetFilters();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const selectFilter = (id: number) => {
-    setFilterId((prevSelectedId) => (prevSelectedId === id ? undefined : id));
+    const newFilterId = filterId === id ? undefined : id;
+    setFilterId(newFilterId);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (newFilterId !== undefined) {
+      params.set("filterId", newFilterId.toString());
+    } else {
+      params.delete("filterId");
+    }
+
+    router.push(`${pathname}?${params.toString()}`);
   };
+
+  useEffect(() => {
+    const filterIdParam = searchParams.get("filterId");
+    if (filterIdParam) {
+      setFilterId(Number(filterIdParam));
+    }
+  }, [searchParams, setFilterId]);
 
   if (isError) return <Error onRetry={refetch} />;
   if (isLoading) return <LoadingIcon />;
