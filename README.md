@@ -69,4 +69,4 @@ npm run test:watch  # To run tests in watch mode
 
 ## Design
 
-**[Figma](link-to-figma)**
+**[Figma](https://www.figma.com/design/O59cTYodflm2C6VozQRV9v/Front-end-Recruitment?node-id=0-1&node-type=canvas&t=nxcZ6EjBNMWH1gZp-0)**
