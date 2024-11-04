@@ -2,7 +2,7 @@
 
 A cat encyclopedia web application built as part of the Vortex Front-end Technical Interview Test. This project uses **The Cat API** to display a collection of cat images, and provides detailed information about each cat when selected.
 
-**Live Demo:** [CATKNOW Live Demo](http://recruiters-love-seeing-live-demos.com/)
+**Live Demo:** [CATKNOW Live Demo](https://vortex-cats.vercel.app/)
 
 ## Features
 
