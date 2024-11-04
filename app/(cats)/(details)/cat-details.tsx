@@ -10,7 +10,7 @@ export default async function CatDetails({ id }: { id: string }) {
 
   return (
     <div className="flex flex-col gap-8 w-full px-12 my-14 md:flex-row lg:w-2/3 lg:mx-auto">
-      <ReturnLink className="absolute top-0 left-2" />
+      <ReturnLink />
       <CatCard
         name={catInfo?.name}
         url={catData.url}
