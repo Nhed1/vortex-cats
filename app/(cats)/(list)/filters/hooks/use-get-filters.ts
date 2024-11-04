@@ -15,5 +15,6 @@ export const useGetFilters = () => {
   return useQuery({
     queryKey: ["cat-filters"],
     queryFn: fetchFilters,
+    staleTime: Infinity,
   });
 };
