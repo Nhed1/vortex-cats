@@ -1,18 +1,16 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CatsList } from "../cats-list";
 import { useGetCats, useInfiniteScroll } from "../hooks";
 
 const queryClient = new QueryClient();
 
-jest.mock("next/navigation", () => {
-  return {
-    useRouter: () => ({
-      push: () => {},
-    }),
-  };
-});
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(() => ({
+    push: jest.fn(),
+  })),
+}));
 
 jest.mock("../hooks", () => ({
   useGetCats: jest.fn(),
@@ -137,5 +135,33 @@ describe("List of cats", () => {
     observerElement.dispatchEvent(new Event("scroll", { bubbles: true }));
 
     expect(fetchNextPage).toHaveBeenCalled();
+  });
+
+  it("should navigate to /id route when a cat card is clicked", async () => {
+    const { useRouter } = await import("next/navigation");
+    const mockPush = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
+
+    const mockData = {
+      pages: [
+        [
+          {
+            id: 1,
+            url: "https://domain.com/images/cat1.jpg",
+            breeds: [{ name: "cat1" }],
+          },
+        ],
+      ],
+    };
+
+    setupGetCatsMock({ data: mockData });
+
+    renderCatsList();
+
+    const catCard = screen.getByText("cat1");
+
+    fireEvent.click(catCard);
+
+    expect(mockPush).toHaveBeenCalledWith("/1");
   });
 });
