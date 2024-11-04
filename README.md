@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CATKNOW: A Cat Encyclopedia Web App
+
+A cat encyclopedia web application built as part of the Vortex Front-end Technical Interview Test. This project uses **The Cat API** to display a collection of cat images, and provides detailed information about each cat when selected.
+
+**Live Demo:** [CATKNOW Live Demo](http://recruiters-love-seeing-live-demos.com/)
+
+## Features
+
+- **Infinite Scrolling List**
+- **Responsive Design**
+- **Category Filtering**
+- **Detailed Cat Information**
 
 ## Getting Started
 
-First, run the development server:
+To get started with CATKNOW, follow these steps:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd catknow
+   ```
+
+2. **Set up your environment:**
+
+   - Copy the `.env.template` to `.env` and generate your API key using **The Cat API** documentation.
+
+   **Link to The Cat API:** [The Cat API Documentation](https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=FJkYOq9tW)
+
+3. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+4. **Run the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser and visit:**
+   [http://localhost:3000](http://localhost:3000) to see the application in action.
+
+## Running Tests
+
+To run the tests for this project, use the following commands:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run test  # To run all tests
+npm run test:watch  # To run tests in watch mode
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** (app router)
+- **TypeScript**
+- **TanStack React Query**
+- **Axios**
+- **Tailwind CSS**
+- **Jest** and **React Testing Library**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Endpoints
 
-## Learn More
+- **Fetch Cat Images:** [GET /v1/images/search](https://api.thecatapi.com/v1/images/search)
+- **Fetch Categories:** [GET /v1/categories](https://api.thecatapi.com/v1/categories)
+- **Get Specific Cat Details:** [GET /v1/images/{id}](https://api.thecatapi.com/v1/images/)
 
-To learn more about Next.js, take a look at the following resources:
+## Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**[Figma](link-to-figma)**
